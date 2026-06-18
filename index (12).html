@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theodore Linden</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #fff;
+    color: #111;
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+  }
+
+  nav .brand {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: #111;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+  }
+
+  nav ul a:hover { color: #111; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: normal;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text h1 em {
+    font-style: italic;
+    color: #888;
+  }
+
+  .hero-text p {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+
+  .hero-image {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 2.5rem;
+  }
+
+  /* FILM */
+  .film-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .film-poster img {
+    width: 100%;
+    display: block;
+  }
+
+  .film-title {
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+  }
+
+  .film-meta {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5rem;
+  }
+
+  .film-awards {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    color: #111;
+    line-height: 2.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .film-desc {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .watch-link {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1px solid #111;
+    padding-bottom: 2px;
+  }
+
+  .watch-link:hover { color: #888; border-color: #888; }
+
+  /* DEV */
+  .dev-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .dev-card {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+  }
+
+  .dev-card-title {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-bottom: 0.25rem;
+  }
+
+  .dev-card-status {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.9;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-value {
+    font-size: 14px;
+    color: #111;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-heading {
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .contact-email {
+    font-size: 1rem;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1px solid #111;
+  }
+
+  .contact-email:hover { color: #888; border-color: #888; }
+
+  .contact-note {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav ul { gap: 1.2rem; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 3rem 1.5rem;
+      gap: 2rem;
+    }
+
+    .hero-image { justify-content: flex-start; }
+    .hero-image img { max-width: 200px; }
+
+    section { padding: 3rem 1.5rem; }
+
+    .film-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .film-poster img { max-width: 200px; }
+
+    .dev-grid { grid-template-columns: 1fr; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="brand">Theodore Linden</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>Theodore Linden</h1>
+    <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #888; line-height: 1.8; margin-top: 1.5rem; max-width: 420px;">Theodore Linden (born July 19th, 2008) is an American filmmaker and writer from Philadelphia, Pennsylvania. His debut short film <em>You Are Here</em> (2026) won Best Picture, Best Cinematography, and Best Thriller at its premiere festival and was announced as an Official Selection of the 2026 SE PA Teen Filmmakers Showcase from over 1,600 global submissions.</p>
+  </div>
+  <div class="hero-image">
+    <img src="headshot.webp" alt="Theodore Linden">
+  </div>
+</div>
+
+<section id="work">
+  <p class="label">Work</p>
+
+  <div class="film-grid">
+    <div class="film-poster">
+      <img src="poster.png" alt="You Are Here poster">
+    </div>
+    <div>
+      <h2 class="film-title">You Are Here</h2>
+      <p class="film-meta">2026 — Short Film — 5 min</p>
+      <div class="film-awards">
+        Best Picture — George School Film Festival<br>
+        Best Cinematography — George School Film Festival<br>
+        Best Thriller — George School Film Festival<br>
+        Official Selection — 2026 SE PA Teen Filmmakers Showcase<br>
+        Official Nomination — Parallusion Film Festival, Beijing
+      </div>
+      <p class="film-desc">When an urban explorer uncovers a desolate shopping mall, he walks the abandoned halls in search of an answer - and a way out.</p>
+      <a href="https://www.youtube.com/watch?v=uai_zOfi2FM" target="_blank" class="watch-link">Watch on YouTube ↗</a>
+    </div>
+  </div>
+
+  <div style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid #eee;">
+    <div class="film-grid">
+      <div class="film-poster">
+        <img src="candids-poster.png" alt="Candids poster">
+      </div>
+      <div>
+        <h2 class="film-title">Candids</h2>
+        <p class="film-meta">2026 — Short Film — In Production</p>
+        <p class="film-desc">A man discovers he is not alone after finding photographs of himself hidden throughout his home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <p class="label">About</p>
+  <div class="about-grid">
+    <p class="about-text">Theodore Linden (born July 19th, 2008) is an American filmmaker and writer from Philadelphia, Pennsylvania. His debut short film <em>You Are Here</em> (2026) won Best Picture, Best Cinematography, and Best Thriller at its premiere festival and was selected as an Official Selection of the 2026 SE PA Teen Filmmakers Showcase from over 1,600 global submissions.</p>
+    <div class="about-details">
+      <div>
+        <p class="detail-label">Based in</p>
+        <p class="detail-value">Philadelphia, Pennsylvania</p>
+      </div>
+      <div>
+        <p class="detail-label">Focus</p>
+        <p class="detail-value">Horror, Atmosphere, Independent Film</p>
+      </div>
+      <div>
+        <p class="detail-label">Production Company</p>
+        <p class="detail-value">Chromatic Films</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="press">
+  <p class="label">Press</p>
+  <div style="border: 1px solid #eee; padding: 1.5rem;">
+    <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 0.5rem;">Chromatic Films — June 2026</p>
+    <p style="font-size: 1.15rem; margin-bottom: 0.75rem;">You Are Here: All The Questions With Theodore Linden</p>
+    <a href="https://chromaticfilm.substack.com/p/you-are-here-all-the-questions-with" target="_blank" class="watch-link">Read the interview ↗</a>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="label">Contact</p>
+  <div class="contact-grid">
+    <h2 class="contact-heading">Get in touch.</h2>
+    <div>
+      <a href="mailto:tedlinden999@gmail.com" class="contact-email">tedlinden999@gmail.com</a>
+      <p class="contact-note">Open to collaboration, press inquiries, and industry conversations.</p>
+      <div style="margin-top: 2rem;">
+        <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; margin-bottom: 0.75rem;">Socials</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="https://www.instagram.com/thelindenfilm/" target="_blank" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #111; text-decoration: none; border-bottom: 1px solid #111; width: fit-content;">Instagram ↗</a>
+          <a href="https://filmfreeway.com/theodorelinden" target="_blank" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #111; text-decoration: none; border-bottom: 1px solid #111; width: fit-content;">Film Freeway ↗</a>
+          <a href="https://www.imdb.com/name/nm18598835/" target="_blank" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #111; text-decoration: none; border-bottom: 1px solid #111; width: fit-content;">IMDb ↗</a>
+          <a href="https://www.youtube.com/@OnlyChromaticFilms" target="_blank" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #111; text-decoration: none; border-bottom: 1px solid #111; width: fit-content;">YouTube ↗</a>
+          <a href="https://www.tiktok.com/@tedlinden" target="_blank" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #111; text-decoration: none; border-bottom: 1px solid #111; width: fit-content;">TikTok ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Theodore Linden</span>
+  <span>Chromatic Films</span>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
